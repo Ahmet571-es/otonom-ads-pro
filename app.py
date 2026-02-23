@@ -186,7 +186,7 @@ with st.sidebar:
 
     # Connection status
     api_configured = all([Config.GOOGLE_ADS_DEVELOPER_TOKEN, Config.GOOGLE_ADS_CLIENT_ID,
-                          Config.GOOGLE_ADS_CLIENT_SECRET, Config.GOOGLE_ADS_REFRESH_TOKEN])
+                          Config.GOOGLE_ADS_CLIENT_SECRET])
     ai_configured = bool(Config.ANTHROPIC_API_KEY)
 
     st.markdown("##### 🔌 Bağlantı Durumu")
@@ -234,7 +234,7 @@ st.markdown('<div class="section-header">📊 Ana Dashboard</div>', unsafe_allow
 
 # Check configuration
 if not api_configured:
-    st.warning("⚠️ Google Ads API henüz yapılandırılmamış. Ayarlar sayfasından credentials'larınızı girin.")
+    st.warning("⚠️ Google Ads API henüz yapılandırılmamış. Manage App → Settings → Secrets bölümünden credentials girin.")
 
     with st.expander("🚀 Hızlı Başlangıç Kılavuzu", expanded=True):
         st.markdown("""
@@ -336,6 +336,10 @@ else:
                 <p style="color:#E6EDF3;">Başlamak için sol menüden <b>👥 Müşteri Yönetimi</b> sayfasına gidin.</p>
             </div>
             """, unsafe_allow_html=True)
+
+# Refresh Token status
+if api_configured and not Config.GOOGLE_ADS_REFRESH_TOKEN:
+    st.info("ℹ️ Refresh Token henüz alınmadı. Sol menüden ⚙️ Ayarlar → OAuth2 Flow sekmesinden alabilirsiniz.")
 
 # Recent activity log
 recent_logs = fetch_all("action_logs", limit=5)
