@@ -6,7 +6,7 @@ from database import init_db
 
 init_db()
 
-st.set_page_config(page_title="Ayarlar", page_icon="⚙️", layout="wide")
+
 st.markdown('<div class="section-header">⚙️ Sistem Ayarları</div>', unsafe_allow_html=True)
 
 tab1, tab2, tab3, tab4 = st.tabs(["🔑 Google Ads API", "🤖 Claude AI", "🔐 OAuth2 Flow", "ℹ️ Sistem Bilgisi"])
